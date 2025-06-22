@@ -3,6 +3,7 @@
 #ps -ef | grep mysqld , backend, in backend search with grep node
 #connection check from backed to  mysql -> telnet mysql.rrajesh.online 3306 
 #less access.log 
+# nslookup backend.rrajesh.online 172.31.29.115 -> to check r53 hosted zones connected with ip address
 
 #frontend logs -> /var/log/nginx
 #backend logs -> /var/log/messages
@@ -12,3 +13,10 @@
 # df -hT | grep xfs | awk -F " " '{print $2F}'
 # df -hT | grep xfs | awk -F " " '{print $6F}' | cut -d "%" -f1
  
+  # way to push your files from local to git if u have not linked bridge between local to git 
+  # git init
+  # git branch -m master main
+  # git remote add origin https://github.com/RajeshReddy96/reddy.git
+  # git push -u origin main
+  # git push -u origin main --force
+   

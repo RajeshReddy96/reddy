@@ -90,9 +90,10 @@ VALIDATE $? "restarted backed"
 #ps -ef | grep mysqld , backend, in backend search with grep node
 #connection check from backed to  mysql -> telnet mysql.rrajesh.online 3306 
 #less access.log 
-
+#nslookup mysql.rrajesh.online
 #frontend logs -> /var/log/nginx
 #backend logs -> /var/log/messages
+#cd /var/log/expense/ -> ls- l -> cat mysql-202-08-27...
 # in backend -> sudo tail -f /var/log/messages
 #crontab used for scheduling command is sudo tail -f /var/log/cron (manual ga cheyakunda linux sever lo autimatic ga a pani deleion aor anything chestunndi)
 #df -hT -> desk usage xfs is important

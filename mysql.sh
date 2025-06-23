@@ -2,7 +2,7 @@
 
 LOGS_FOLDER="/var/log/expense"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
-TIMESTAMP=$(date +%Y-%m-%d-%H-%S)
+TIMESTAMP=$(date +%Y-%m-%d-%H-%M-%S)
 LOG_FILE=$LOGS_FOLDER/$SCRIPT_NAME-$TIMESTAMP.log
 mkdir -p $LOGS_FOLDER
 
@@ -15,7 +15,7 @@ Y="\e[33m"
 CHECK_ROOT(){
     if [ $USERID -ne 0 ]
     then 
-        echo -e "$R Please run this script with root priviliges $N" | tee -a $LOG_FILE 
+        echo -e "$R Please run this script with root privileges $N" | tee -a $LOG_FILE 
         exit 1
     fi
 }
@@ -36,7 +36,7 @@ CHECK_ROOT
 
 dnf install mysql-server -y &>>$LOG_FILE
 
-VALIDATE $? " Installing MYSQL Server"
+VALIDATE $? "Installing MYSQL Server"
 
 systemctl enable mysqld &>>$LOG_FILE
 VALIDATE $? "Enabled MYSQL Server"
@@ -47,9 +47,9 @@ VALIDATE $? "started mysql server"
 mysql -h mysql.rrajesh.online -u root -pExpenseApp@1 -e 'show databases;' &>>$LOG_FILE
 if [ $?-ne 0 ]
 then 
-    echo "MYSQL root password is not setup, settting now" &>>$LOG_FILE
+    echo "MYSQL root password is not setup, setting now" &>>$LOG_FILE
     mysql_secure_installation --set-root-pass ExpenseApp@1 
     VALIDATE $? "Setting UP root password"
-else
-    echo -e "MYSQL root pasword is already setup..$Y SKIPPING $N" | tee -a $LOG_FILE
+else 
+    echo -e "MYSQL root password is already setup..$Y SKIPPING $N" | tee -a $LOG_FILE
 fi

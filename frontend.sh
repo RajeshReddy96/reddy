@@ -2,7 +2,7 @@
 
 LOGS_FOLDER="/var/log/expense"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
-TIMESTAMP=$(date +%Y-%m-%d-%H-%S)
+TIMESTAMP=$(date +%Y-%m-%d-%H-%M-%S)
 LOG_FILE=$LOGS_FOLDER/$SCRIPT_NAME-$TIMESTAMP.log
 mkdir -p $LOGS_FOLDER
 
@@ -15,7 +15,7 @@ Y="\e[33m"
 CHECK_ROOT(){
     if [ $USERID -ne 0 ]
     then 
-        echo -e "$R Please run this script with root priviliges $N" | tee -a $LOG_FILE 
+        echo -e "$R Please run this script with root privileges $N" | tee -a $LOG_FILE 
         exit 1
     fi
 }
@@ -44,7 +44,7 @@ systemctl start nginx &>>$LOG_FILE
 VALIDATE $? "Start nginx"
 
 rm -rf /usr/share/nginx/html/* &>>$LOG_FILE
-VALIDATE $? "remobing default website"
+VALIDATE $? "removing default website"
 
 curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip &>>$LOG_FILE
 VALIDATE $? "downloading frontend code"
